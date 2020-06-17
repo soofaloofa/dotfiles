@@ -12,7 +12,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'altercation/vim-colors-solarized'
 Plug 'c9s/bufexplorer'
 Plug 'godlygeek/tabular'
-Plug 'itspriddle/vim-marked'
 Plug 'janko-m/vim-test'
 Plug 'kana/vim-textobj-user' " required for vim-textobj-quote/sentence
 Plug 'kien/ctrlp.vim'
