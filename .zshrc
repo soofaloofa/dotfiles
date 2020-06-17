@@ -5,15 +5,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
+# oh-my-zsh installation.
 export ZSH="/Users/kevinsookocheff/.oh-my-zsh"
-
 ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git colorize extract virtualenv)
-
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -47,9 +42,6 @@ eval "$(pyenv virtualenv-init -)"
 export PIP_REQUIRE_VIRTUALENV=true
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
-# Ruby Version Manager
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
-
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
@@ -58,7 +50,7 @@ alias vim="nvim"
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
-# Secrets
+# Load any secrets not to commit to Github 
 if [ -f ~/.secrets ]; then
   source ~/.secrets
 fi
