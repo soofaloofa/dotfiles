@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # oh-my-zsh installation.
-export ZSH="/Users/kevinsookocheff/.oh-my-zsh"
+export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git colorize extract virtualenv)
 source $ZSH/oh-my-zsh.sh
@@ -28,12 +28,15 @@ export NVM_DIR="$HOME/.nvm"
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
 # opam
-test -r /Users/kevinsookocheff/.opam/opam-init/init.sh && . /Users/kevinsookocheff/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+test -r $HOME/.opam/opam-init/init.sh && . $HOME/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 
 # go
 export GOROOT=$(go env GOROOT)
 export GOPATH=$HOME/Projects/golang
 export PATH=$(brew --prefix)/bin:$HOME/bin:$HOME/.rvm/bin:$GOROOT/:$HOME/.jenv/shims:bin:$PATH
+
+# Dart
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # PyEnv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -42,13 +45,16 @@ eval "$(pyenv virtualenv-init -)"
 export PIP_REQUIRE_VIRTUALENV=true
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
+# Google Cloud SDK.
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
 # Aliases
 alias vim="nvim"
-alias zshconfig="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
+alias zshconfig="vim $HOME/.zshrc"
 
 # Load any secrets not to commit to Github 
 if [ -f ~/.secrets ]; then
@@ -57,3 +63,4 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
