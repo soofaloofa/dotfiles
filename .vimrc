@@ -9,10 +9,9 @@ call plug#begin('~/.vim/plugged')
 " ----------------------------------------
 " Plugin List
 " ----------------------------------------
-Plug 'altercation/vim-colors-solarized'
 Plug 'c9s/bufexplorer'
 Plug 'godlygeek/tabular'
-Plug 'vim-test/vim-test'
+Plug 'jacoborus/tender.vim'
 Plug 'kana/vim-textobj-user' " required for vim-textobj-quote/sentence
 Plug 'kien/ctrlp.vim'
 Plug 'luochen1990/rainbow'
@@ -36,6 +35,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-test/vim-test'
 
 call plug#end()
 
@@ -77,15 +77,15 @@ endif
 " ---------------
 " Color
 " ---------------
-set t_Co=256
-colorscheme solarized
-set background=dark
+if (has("termguicolors"))
+  set termguicolors
+endif
+colorscheme tender
 
 highlight Comment cterm=italic  
 " Disable search highlighting by pressing enter
 nnoremap <CR> :nohlsearch<CR><CR>   
 " color column 80, and 120 onwards
-let &colorcolumn="80,".join(range(120,999),",") 
 
 " ---------------
 " Terminal
@@ -390,7 +390,7 @@ command! -nargs=0 Prose call Prose()
 " ---------------
 let g:airline_powerline_fonts=1
 let g:airline_section_x = '%{PencilMode()}'
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'tender'
 
 " ---------------
 " TagBar
