@@ -20,6 +20,12 @@ else
   export EDITOR='nvim'
 fi
 
+# nvm
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+if [ "$NVM_DIR/nvm.sh" ]; then
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+fi
+
 # jenv
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 export PATH=:$HOME/.jenv/shims:$PATH
