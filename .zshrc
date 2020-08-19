@@ -20,30 +20,36 @@ else
   export EDITOR='nvim'
 fi
 
-# Node Version Manager
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
-
 # jenv
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
+export PATH=:$HOME/.jenv/shims:$PATH
 
 # opam
 test -r $HOME/.opam/opam-init/init.sh && . $HOME/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 
 # go
-export GOROOT=$(go env GOROOT)
-export GOPATH=$HOME/Projects/golang
-export PATH=$(brew --prefix)/bin:$HOME/bin:$HOME/.rvm/bin:$GOROOT/:$HOME/.jenv/shims:bin:$PATH
+if which go > /dev/null; then
+  export GOROOT=$(go env GOROOT)
+  export GOPATH=$HOME/Projects/golang
+  export PATH=$GOROOT/:$PATH
+fi
+
+# Brew
+if which brew > /dev/null; then 
+  export PATH=$(brew --prefix)/bin:$PATH 
+fi
 
 # Dart
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # PyEnv
-export PYENV_ROOT="$HOME/.pyenv"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)" 
-export PIP_REQUIRE_VIRTUALENV=true
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+if which pyenv > /dev/null; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)" 
+  export PIP_REQUIRE_VIRTUALENV=true
+  export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+fi
 
 # Google Cloud SDK.
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
@@ -63,4 +69,3 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
