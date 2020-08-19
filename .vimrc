@@ -11,9 +11,9 @@ call plug#begin('~/.vim/plugged')
 " ----------------------------------------
 Plug 'c9s/bufexplorer'
 Plug 'godlygeek/tabular'
-Plug 'jacoborus/tender.vim'
 Plug 'kana/vim-textobj-user' " required for vim-textobj-quote/sentence
 Plug 'kien/ctrlp.vim'
+Plug 'lifepillar/vim-solarized8'
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
@@ -80,7 +80,7 @@ endif
 if (has("termguicolors"))
   set termguicolors
 endif
-colorscheme tender
+colorscheme solarized8
 
 highlight Comment cterm=italic  
 " Disable search highlighting by pressing enter
@@ -390,7 +390,7 @@ command! -nargs=0 Prose call Prose()
 " ---------------
 let g:airline_powerline_fonts=1
 let g:airline_section_x = '%{PencilMode()}'
-let g:airline_theme = 'tender'
+let g:airline_theme = 'solarized'
 
 " ---------------
 " TagBar
