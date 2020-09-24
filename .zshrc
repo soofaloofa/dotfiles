@@ -20,11 +20,13 @@ else
   export EDITOR='nvim'
 fi
 
+# jump 
+eval "$(jump shell)"
+
 # nvm
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-if [ "$NVM_DIR/nvm.sh" ]; then
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # jenv
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
@@ -53,8 +55,6 @@ if which pyenv > /dev/null; then
   export PYENV_ROOT="$HOME/.pyenv"
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)" 
-  export PIP_REQUIRE_VIRTUALENV=true
-  export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 fi
 
 # Google Cloud SDK.

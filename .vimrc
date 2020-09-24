@@ -11,15 +11,16 @@ call plug#begin('~/.vim/plugged')
 " ----------------------------------------
 Plug 'c9s/bufexplorer'
 Plug 'godlygeek/tabular'
+Plug 'junegunn/fzf'
 Plug 'kana/vim-textobj-user' " required for vim-textobj-quote/sentence
 Plug 'kien/ctrlp.vim'
 Plug 'lifepillar/vim-solarized8'
 Plug 'luochen1990/rainbow'
+Plug 'itspriddle/vim-marked'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'nelstrom/vim-qargs'
-Plug 'neomake/neomake'
 Plug 'reedes/vim-lexical'
 Plug 'reedes/vim-litecorrect'
 Plug 'reedes/vim-pencil'
@@ -27,6 +28,7 @@ Plug 'reedes/vim-textobj-quote'
 Plug 'reedes/vim-textobj-sentence'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -86,6 +88,7 @@ highlight Comment cterm=italic
 " Disable search highlighting by pressing enter
 nnoremap <CR> :nohlsearch<CR><CR>   
 " color column 80, and 120 onwards
+let &colorcolumn="80,".join(range(120,999),",") 
 
 " ---------------
 " Terminal
@@ -393,6 +396,11 @@ let g:airline_section_x = '%{PencilMode()}'
 let g:airline_theme = 'solarized'
 
 " ---------------
+" Deoplete
+" ---------------
+let g:deoplete#enable_at_startup = 1
+
+" ---------------
 " TagBar
 " ---------------
 nnoremap <leader>tb :TagbarToggle<CR>
@@ -435,16 +443,6 @@ nmap <silent> <leader>tf :TestFile<CR>
 nmap <silent> <leader>ta :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
-
-" ---------------
-" neomake
-" ---------------
-" When writing a buffer.
-call neomake#configure#automake('w')
-" When writing a buffer, and on normal mode changes (after 750ms).
-call neomake#configure#automake('nw', 750)
-" When reading a buffer (after 1s), and when writing.
-call neomake#configure#automake('rw', 1000)
 
 " ---------------
 " undotree
