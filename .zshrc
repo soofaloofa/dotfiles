@@ -32,3 +32,6 @@ export GPG_TTY=$(tty)
 # Aliases
 alias vim="nvim"
 alias zshconfig="vim $HOME/.zshrc"
+
+# wk
+source ~/.wk/profile
