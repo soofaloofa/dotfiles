@@ -29,9 +29,19 @@ export GPG_TTY=$(tty)
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 . ~/.asdf/plugins/java/set-java-home.zsh
 
+# go
+export GOPATH=$(go env GOPATH)
+export GOROOT=$(go env GOROOT)
+export GOBIN=$(go env GOBIN)
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOBIN
+
 # Aliases
 alias vim="nvim"
 alias zshconfig="vim $HOME/.zshrc"
 
 # wk
 source ~/.wk/profile
+export PATH="/opt/homebrew/opt/go@1.16/bin:$PATH"
+export PATH="$PATH":"$HOME/.pub-cache/bin"
