@@ -8,12 +8,6 @@ return require('packer').startup(function(use)
     requires = { "kyazdani42/nvim-web-devicons" },
   }
   use {
-    "folke/which-key.nvim",
-    config = function()
-      require("which-key").setup {}
-    end
-  }
-  use {
     'gelguy/wilder.nvim',
     config = function()
       require('wilder').setup({modes = {':', '/', '?'}})
@@ -85,7 +79,6 @@ return require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter', 
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
   }
-  use({'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim" }})
   use {
     'simrat39/symbols-outline.nvim',
     config = function()
