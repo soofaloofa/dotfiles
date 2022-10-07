@@ -29,7 +29,7 @@ vim.opt.backspace = "indent,eol,start" -- backspace works on every char in inser
 vim.opt.clipboard = 'unnamedplus'
 
 -- wait time
-vim.opt.timeout = false
+-- vim.opt.timeout = false
 vim.opt.timeoutlen = 1000
 vim.opt.ttimeout = true
 vim.opt.ttimeoutlen = 100
@@ -49,7 +49,7 @@ vim.opt.eol = false -- show if there's no eol char
 vim.opt.showbreak= '↪' -- character to show when line is broken
 
 vim.opt.termguicolors = true
-vim.cmd('colorscheme solarized8')
+-- vim.cmd('colorscheme solarized')
 
 -- sidebar
 vim.opt.number = true -- line number on the left

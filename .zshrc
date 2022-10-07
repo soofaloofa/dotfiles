@@ -29,6 +29,9 @@ export GPG_TTY=$(tty)
 source /opt/homebrew/opt/asdf/libexec/asdf.sh
 source ~/.asdf/plugins/java/set-java-home.zsh
 
+# jdtls
+export JDTLS_JVM_ARGS="-javaagent:$HOME/.local/share/java/lombok.jar"
+
 # go
 export GOPATH=$(go env GOPATH)
 export GOROOT=$(go env GOROOT)

@@ -31,7 +31,6 @@ return require('packer').startup(function(use)
       })
     end,
   }
-  use 'lifepillar/vim-solarized8'
   use {
     'kyazdani42/nvim-tree.lua',
     requires = {
@@ -42,13 +41,19 @@ return require('packer').startup(function(use)
       require("nvim-tree").setup()
     end,
   }
+  use {
+    'navarasu/onedark.nvim',
+    config = function()
+      require('onedark').load()
+    end,
+  }
   use 'neovim/nvim-lspconfig'
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
     config = function()
       require('lualine').setup {
-        options = { theme  = 'solarized_dark' },
+        options = { theme  = 'onedark' },
       }
     end,
   }
@@ -89,4 +94,5 @@ return require('packer').startup(function(use)
   use 'tpope/vim-repeat'
   use 'tpope/vim-surround'
   use 'tpope/vim-unimpaired'
+  use 'vim-test/vim-test'
 end)

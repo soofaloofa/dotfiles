@@ -1,49 +1,45 @@
+function nnoremap(rhs, lhs)
+  vim.keymap.set("n", rhs, lhs, { silent = true, noremap = true })
+end
+
+function inoremap(rhs, lhs)
+  vim.keymap.set("i", rhs, lhs, { silent = true, noremap = true })
+end
+
+-- Disable search highlighting by pressing enter
+nnoremap("<cr>", "<cmd>:nohlsearch<cr><cr>")
+
+-- Tab management
+nnoremap("<C-t>", "<cmd>:tabnew<cr>")
+nnoremap("<C-Delete>", "<cmd>:tabclose<cr>")
+inoremap("<C-t>", "<cmd>:tabnew<cr>")
+inoremap("<C-Delete>", "<cmd>:tabclose<cr>")
+
 -- telescope
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>",
-  {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>",
-  {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>",
-  {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>",
-  {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>fm", "<cmd>Telescope metals commands<cr>",
-  {silent = true, noremap = true}
-)
+nnoremap("<leader>ff", "<cmd>Telescope find_files<cr>")
+nnoremap("<leader>fg", "<cmd>Telescope live_grep<cr>")
+nnoremap("<leader>fb", "<cmd>Telescope buffers<cr>")
+nnoremap("<leader>fh", "<cmd>Telescope help_tags<cr>")
+nnoremap("<leader>fm", "<cmd>Telescope metals commands<cr>")
 
 -- trouble
-vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
-  {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
-  {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
-  {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
-  {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
-  {silent = true, noremap = true}
-)
-vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
-  {silent = true, noremap = true}
-)
+nnoremap("<leader>xx", "<cmd>TroubleToggle<cr>")
+nnoremap("<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>")
+nnoremap("<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>")
+nnoremap("<leader>xl", "<cmd>TroubleToggle loclist<cr>")
+nnoremap("<leader>xq", "<cmd>TroubleToggle quickfix<cr>")
+nnoremap("<leader>xr", "<cmd>TroubleToggle lsp_references<cr>")
 
 -- symbols-outline
-vim.keymap.set("n", "<leader>tb", "<cmd>SymbolsOutline<cr>",
-  {silent = true, noremap = true}
-)
+nnoremap("<leader>tb", "<cmd>SymbolsOutline<cr>")
 
 -- nvim-tree
-vim.keymap.set("n", "<leader>nn", "<cmd>NvimTreeToggle<cr>",
-  {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>nf", "<cmd>NvimTreeFindFile<cr>",
-  {silent = true, noremap = true}
-)
+nnoremap("<leader>nn", "<cmd>NvimTreeToggle<cr>")
+nnoremap("<leader>nf", "<cmd>NvimTreeFindFile<cr>")
+
+-- vim-test
+nnoremap("<leader>t", "<cmd>TestNearest<cr>")
+nnoremap("<leader>T", "<cmd>TestFile<cr>")
+nnoremap("<leader>a", "<cmd>TestSuite<cr>")
+nnoremap("<leader>l", "<cmd>TestLast<cr>")
+nnoremap("<leader>g", "<cmd>TestVisit<cr>")
