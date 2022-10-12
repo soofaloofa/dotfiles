@@ -1,5 +1,4 @@
 -- LSP Configuration
-
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
@@ -40,7 +39,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local lspconfig = require('lspconfig')
 
 -- enable language servers
-local servers = { 'tsserver', 'pyright', 'metals', 'jdtls' }
+local servers = { 'tsserver', 'pyright', 'metals'}
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -48,6 +47,14 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
+
+-- enable jdtls with proper root_dir
+local util = require 'lspconfig.util'
+require'lspconfig'.jdtls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = util.root_pattern({'.git', 'mvnw', 'gradlew'}),
+}
 
 -- nvim-cmp setup
 local cmp = require 'cmp'

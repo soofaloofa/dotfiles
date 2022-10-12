@@ -1,14 +1,13 @@
 HOME = os.getenv("HOME")
 
--- language provider support
+-- disable language provider support (lua and vimscript plugins only)
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_python_provider = 0
 vim.g.loaded_python3_provider = 0
--- vim.g.python3_host_prog = "/Users/kevinsookocheff/.config/nvim/neovimvenv/bin/python"
 
--- disabled
+-- disable unused stuff
 vim.g.loaded = 1
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1

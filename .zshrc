@@ -25,14 +25,14 @@ eval "$(jump shell)"
 # gpg
 export GPG_TTY=$(tty)
 
-# asdf 
-source /opt/homebrew/opt/asdf/libexec/asdf.sh
-source ~/.asdf/plugins/java/set-java-home.zsh
-
 # jdtls
 export JDTLS_JVM_ARGS="-javaagent:$HOME/.local/share/java/lombok.jar"
 
+# rust
+export CARGO_NET_GIT_FETCH_WITH_CLI=true
+
 # go
+export GOPRIVATE=github.com/Workiva/*
 export GOPATH=$(go env GOPATH)
 export GOROOT=$(go env GOROOT)
 export GOBIN=$(go env GOBIN)
@@ -57,4 +57,10 @@ source ~/.wk/profile
 export PATH="/opt/homebrew/opt/go@1.16/bin:$PATH"
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
+# mongo
 export PATH="/opt/homebrew/opt/mongodb-community@4.4/bin:$PATH"
+
+# asdf
+source /opt/homebrew/opt/asdf/libexec/asdf.sh
+source ~/.asdf/plugins/java/set-java-home.zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
