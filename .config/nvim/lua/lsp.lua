@@ -9,9 +9,6 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
@@ -34,27 +31,16 @@ end
 
 -- add completion capability
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local lspconfig = require('lspconfig')
-
--- enable language servers
-local servers = { 'tsserver', 'pyright', 'metals'}
-
+local servers = { 'tsserver', 'pyright', 'metals', 'dartls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
   }
 end
-
--- enable jdtls with proper root_dir
-local util = require 'lspconfig.util'
-require'lspconfig'.jdtls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  root_dir = util.root_pattern({'.git', 'mvnw', 'gradlew'}),
-}
 
 -- nvim-cmp setup
 local cmp = require 'cmp'

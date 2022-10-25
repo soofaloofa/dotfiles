@@ -29,7 +29,7 @@ vim.opt.clipboard = 'unnamedplus'
 
 -- wait time
 -- vim.opt.timeout = false
-vim.opt.timeoutlen = 1000
+vim.opt.timeoutlen = 300
 vim.opt.ttimeout = true
 vim.opt.ttimeoutlen = 100
 

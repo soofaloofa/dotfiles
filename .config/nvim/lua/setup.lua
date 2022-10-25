@@ -1,5 +1,9 @@
 -- plugin configuration
-require("trouble").setup() 
+require("trouble").setup({
+  mode = "document_diagnostics"
+}) 
+
+require("which-key").setup() 
 
 require("wilder").setup({modes = {':', '/', '?'}})
 
@@ -26,7 +30,21 @@ require('lualine').setup {
 
 require('telescope').setup({
   defaults = {
-    path_display = { shorten = 1 },
+    path_display = { 
+      shorten = {
+        len = 3, exclude = {1, -1}
+      },
+      truncate = true
+    },
+    dynamic_preview_title = true,
+    mappings = {
+      n = {
+    	  ['<c-d>'] = require('telescope.actions').delete_buffer
+      },
+      i = {
+        ['<c-d>'] = require('telescope.actions').delete_buffer
+      },
+    },
   },
   extensions = {
     fzf = {
@@ -39,6 +57,7 @@ require('telescope').setup({
   }
 })
 require('telescope').load_extension('fzf')
+require("telescope").load_extension("ui-select")
 
 require("symbols-outline").setup {
   auto_close = true,

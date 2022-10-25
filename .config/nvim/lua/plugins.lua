@@ -4,6 +4,7 @@ return require('packer').startup(function(use)
 
   use 'bronson/vim-visual-star-search'
   use 'folke/trouble.nvim'
+  use 'folke/which-key.nvim'
   use 'gelguy/wilder.nvim'
   use 'godlygeek/tabular'
   use 'hrsh7th/nvim-cmp'
@@ -19,6 +20,8 @@ return require('packer').startup(function(use)
     tag = 'nightly', -- optional, updated every week. (see issue #1193)
   }
   use 'ludovicchabant/vim-gutentags'
+  use 'mfussenegger/nvim-dap'
+  use 'mfussenegger/nvim-jdtls'
   use 'navarasu/onedark.nvim' 
   use 'neovim/nvim-lspconfig'
   use 'nvim-lua/plenary.nvim'
@@ -31,6 +34,7 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope-fzf-native.nvim', 
     run = 'make',
   } 
+  use {'nvim-telescope/telescope-ui-select.nvim' }
   use 'nvim-treesitter/nvim-treesitter'
   use 'simrat39/symbols-outline.nvim'
   use 'tpope/vim-commentary'

@@ -1,0 +1,135 @@
+local home = os.getenv('HOME')
+local jdtls = require('jdtls')
+local root_markers = {'gradlew', 'mvnw', '.git'}
+local root_dir = require('jdtls.setup').find_root(root_markers)
+local workspace_folder = home .. "/.local/share/eclipse/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  jdtls.setup_dap()
+  jdtls.setup.add_commands()
+
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, bufopts)
+  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+
+  -- Java extensions
+  vim.keymap.set('n', "<C-o>", jdtls.organize_imports, opts)
+  vim.keymap.set('n', "<leader>df", jdtls.test_class, opts)
+  vim.keymap.set('n', "<leader>dn", jdtls.test_nearest_method, opts)
+  vim.keymap.set('n', "<space>ev", jdtls.extract_variable, opts)
+  vim.keymap.set('v', "<space>em", [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], opts)
+  vim.keymap.set('n', "<space>ec", jdtls.extract_constant, opts)
+  local create_command = vim.api.nvim_buf_create_user_command
+  create_command(bufnr, 'W', require('me.lsp.ext').remove_unused_imports, {
+    nargs = 0,
+  })
+end
+
+local bundles = {
+  vim.fn.glob(home .. '/Projects/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar'),
+}
+vim.list_extend(bundles, vim.split(vim.fn.glob(home .. '/Projects/vscode-java-test/server/*.jar'), "\n"))
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+local config = {
+  flags = {
+    debounce_text_changes = 80,
+  },
+  capabilities = capabilities,
+  on_attach = on_attach,
+  init_options = {
+    bundles = bundles
+  },
+  settings = {
+    java = {
+      format = {
+        settings = {
+          url = "/.local/share/eclipse/eclipse-java-google-style.xml",
+          profile = "GoogleStyle",
+        },
+      },
+      signatureHelp = { enabled = true },
+      contentProvider = { preferred = 'fernflower' },
+      completion = {
+        favoriteStaticMembers = {
+          "org.hamcrest.MatcherAssert.assertThat",
+          "org.hamcrest.Matchers.*",
+          "org.hamcrest.CoreMatchers.*",
+          "org.junit.jupiter.api.Assertions.*",
+          "java.util.Objects.requireNonNull",
+          "java.util.Objects.requireNonNullElse",
+          "org.mockito.Mockito.*"
+        },
+        filteredTypes = {
+          "com.sun.*",
+          "io.micrometer.shaded.*",
+          "java.awt.*",
+          "jdk.*",
+          "sun.*",
+        },
+      },
+      sources = {
+        organizeImports = {
+          starThreshold = 9999;
+          staticStarThreshold = 9999;
+        },
+      },
+      codeGeneration = {
+        toString = {
+          template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}"
+        },
+        hashCodeEquals = {
+          useJava7Objects = true,
+        },
+        useBlocks = true,
+      },
+      configuration = {
+        runtimes = {
+          {
+            name = "JavaSE-11",
+            path = home .. "/.asdf/installs/java/corretto-11.0.16.9.1",
+          },
+          {
+            name = "JavaSE-17",
+            path = home .. "/.asdf/installs/java/corretto-17.0.4.9.1",
+          },
+        }
+      }
+    }
+  },
+  cmd = {
+    home .. "/.asdf/installs/java/corretto-17.0.4.9.1/bin/java",
+    '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+    '-Dosgi.bundles.defaultStartLevel=4',
+    '-Declipse.product=org.eclipse.jdt.ls.core.product',
+    '-Dlog.protocol=true',
+    '-Dlog.level=ALL',
+    '-Xmx4g',
+    '--add-modules=ALL-SYSTEM',
+    '--add-opens', 'java.base/java.util=ALL-UNNAMED',
+    '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+    '-javaagent:' .. home .. '/.local/share/eclipse/lombok.jar',
+    '-jar', vim.fn.glob('/opt/homebrew/Cellar/jdtls/1.16.0/libexec/plugins/org.eclipse.equinox.launcher_*.jar'),
+    '-configuration', '/opt/homebrew/Cellar/jdtls/1.16.0/libexec/config_mac',
+    '-data', workspace_folder,
+  },
+}
+
+jdtls.start_or_attach(config)
