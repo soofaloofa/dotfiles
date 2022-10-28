@@ -57,8 +57,11 @@ require('telescope').setup({
   }
 })
 require('telescope').load_extension('fzf')
-require("telescope").load_extension("ui-select")
+require('telescope').load_extension('ui-select')
+require('telescope').load_extension('dap')
 
 require("symbols-outline").setup {
   auto_close = true,
 }
+
+require("nvim-dap-virtual-text").setup()

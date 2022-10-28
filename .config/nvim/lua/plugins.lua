@@ -35,8 +35,10 @@ return require('packer').startup(function(use)
     run = 'make',
   } 
   use {'nvim-telescope/telescope-ui-select.nvim' }
+  use 'nvim-telescope/telescope-dap.nvim'
   use 'nvim-treesitter/nvim-treesitter'
   use 'simrat39/symbols-outline.nvim'
+  use 'theHamsta/nvim-dap-virtual-text'
   use 'tpope/vim-commentary'
   use 'tpope/vim-repeat'
   use 'tpope/vim-surround'

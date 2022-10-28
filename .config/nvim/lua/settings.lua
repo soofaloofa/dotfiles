@@ -68,9 +68,9 @@ vim.o.mps = vim.o.mps .. ",<:>"
 -- backup and undo
 vim.opt.backup = true
 vim.opt.swapfile = false
-vim.opt.backupdir = HOME .. '/.config/nvim/.backup//'
-vim.opt.directory = HOME .. '/.config/nvim/.swp//'
-vim.opt.undodir = HOME .. '/.config/nvim/.undo//'
+vim.opt.backupdir = HOME .. '/.config/nvim/.backup/'
+vim.opt.directory = HOME .. '/.config/nvim/.swp/'
+vim.opt.undodir = HOME .. '/.config/nvim/.undo/'
 vim.opt.undofile = true
 vim.opt.undolevels = 1000
 vim.opt.undoreload = 10000
