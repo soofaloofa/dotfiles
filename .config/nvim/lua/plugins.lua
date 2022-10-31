@@ -30,17 +30,18 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
   }
+  use 'nvim-telescope/telescope-dap.nvim'
   use {
     'nvim-telescope/telescope-fzf-native.nvim', 
     run = 'make',
   } 
-  use {'nvim-telescope/telescope-ui-select.nvim' }
-  use 'nvim-telescope/telescope-dap.nvim'
+  use 'nvim-telescope/telescope-ui-select.nvim'
   use 'nvim-treesitter/nvim-treesitter'
   use 'simrat39/symbols-outline.nvim'
-  use 'theHamsta/nvim-dap-virtual-text'
   use 'tpope/vim-commentary'
+  use 'tpope/vim-fugitive'
   use 'tpope/vim-repeat'
+  use 'tpope/vim-rhubarb'
   use 'tpope/vim-surround'
   use 'tpope/vim-unimpaired'
   use 'vim-test/vim-test'

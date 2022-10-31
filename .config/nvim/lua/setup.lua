@@ -64,4 +64,9 @@ require("symbols-outline").setup {
   auto_close = true,
 }
 
-require("nvim-dap-virtual-text").setup()
+-- vim-fugitive GBrowse use open instead of netrw
+vim.api.nvim_create_user_command(
+  'Browse',
+  "silent execute '!open' shellescape(<q-args>,1)",
+  { nargs = 1, bang = true }
+)
