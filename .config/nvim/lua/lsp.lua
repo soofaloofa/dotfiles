@@ -29,8 +29,29 @@ local on_attach = function(client, bufnr)
   nnoremap('<space>D', vim.lsp.buf.type_definition, bufopts, "Go to type definition")
   nnoremap('<space>rn', vim.lsp.buf.rename, bufopts, "Rename")
   nnoremap('<space>ca', vim.lsp.buf.code_action, bufopts, "Code actions")
+  vim.keymap.set('v', "<space>ca", "<ESC><CMD>lua vim.lsp.buf.range_code_action()<CR>", 
+    { noremap=true, silent=true, buffer=bufnr, desc = "Code actions" })
   -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts, "List references")
   nnoremap('<space>f', function() vim.lsp.buf.format { async = true } end, bufopts, "Format file")
+
+  vim.cmd('augroup lsp_aucmds')
+  vim.cmd(string.format('au! * <buffer=%d>', bufnr))
+  if client.server_capabilities['document_highlight'] then
+    vim.cmd(string.format('au CursorHold  <buffer=%d> lua vim.lsp.buf.document_highlight()', bufnr))
+    vim.cmd(string.format('au CursorHoldI <buffer=%d> lua vim.lsp.buf.document_highlight()', bufnr))
+    vim.cmd(string.format('au CursorMoved <buffer=%d> lua vim.lsp.buf.clear_references()', bufnr))
+  end
+  if vim.lsp.codelens and client.server_capabilities['code_lens'] then
+    api.nvim_buf_set_keymap(bufnr, "n", "<leader>cr", "<Cmd>lua vim.lsp.codelens.refresh()<CR>", opts)
+    api.nvim_buf_set_keymap(bufnr, "n", "<leader>ce", "<Cmd>lua vim.lsp.codelens.run()<CR>", opts)
+  end
+  vim.cmd('augroup end')
+end
+
+local on_exit = function(client, bufnr)
+  vim.cmd('augroup lsp_aucmds')
+  vim.cmd(string.format('au! * <buffer=%d>', bufnr))
+  vim.cmd('augroup end')
 end
 
 -- add completion capability
@@ -42,46 +63,9 @@ local servers = { 'tsserver', 'pyright', 'metals', 'dartls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
+    on_exit = on_exit,
     capabilities = capabilities,
   }
 end
-
--- nvim-cmp setup
-local cmp = require 'cmp'
-cmp.setup {
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' },
-  },
-  snippet = {
-    expand = function(args)
-      -- Comes from vsnip
-      vim.fn["vsnip#anonymous"](args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  }),
-}
 
 require('dap.ext.vscode').load_launchjs()

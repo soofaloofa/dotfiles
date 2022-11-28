@@ -29,6 +29,8 @@ local on_attach = function(client, bufnr)
   nnoremap('<space>D', vim.lsp.buf.type_definition, bufopts, "Go to type definition")
   nnoremap('<space>rn', vim.lsp.buf.rename, bufopts, "Rename")
   nnoremap('<space>ca', vim.lsp.buf.code_action, bufopts, "Code actions")
+  vim.keymap.set('v', "<space>ca", "<ESC><CMD>lua vim.lsp.buf.range_code_action()<CR>", 
+    { noremap=true, silent=true, buffer=bufnr, desc = "Code actions" })
   nnoremap('<space>f', function() vim.lsp.buf.format { async = true } end, bufopts, "Format file")
 
   -- Java extensions
@@ -111,6 +113,10 @@ local config = {
             name = "JavaSE-17",
             path = home .. "/.asdf/installs/java/corretto-17.0.4.9.1",
           },
+          {
+            name = "JavaSE-1.8",
+            path = home .. "/.asdf/installs/java/corretto-8.352.08.1"
+          },
         }
       }
     }
@@ -127,8 +133,8 @@ local config = {
     '--add-opens', 'java.base/java.util=ALL-UNNAMED',
     '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
     '-javaagent:' .. home .. '/.local/share/eclipse/lombok.jar',
-    '-jar', vim.fn.glob('/opt/homebrew/Cellar/jdtls/1.16.0/libexec/plugins/org.eclipse.equinox.launcher_*.jar'),
-    '-configuration', '/opt/homebrew/Cellar/jdtls/1.16.0/libexec/config_mac',
+    '-jar', vim.fn.glob('/opt/homebrew/Cellar/jdtls/1.17.0/libexec/plugins/org.eclipse.equinox.launcher_*.jar'),
+    '-configuration', '/opt/homebrew/Cellar/jdtls/1.17.0/libexec/config_mac',
     '-data', workspace_folder,
   },
 }
