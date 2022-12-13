@@ -1,6 +1,3 @@
-require('settings')
+require('core')
 require('plugins')
-require('setup')
 require('lsp')
-require('treesitter')
-require('keymappings')

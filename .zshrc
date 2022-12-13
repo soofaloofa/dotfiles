@@ -13,6 +13,18 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export LANG="en_US.UTF-8"
 
+# Aliases
+alias vi="nvim"
+alias vim="nvim"
+alias zshconfig="vim $HOME/.zshrc"
+
+# Functions
+function rsdoc() {
+  docker-compose -f docker-compose.yml stop $1
+  docker-compose -f docker-compose.yml rm -f $1
+  docker-compose -f docker-compose.yml up -d $1
+}
+
 # Homebrew
 export PATH=/opt/homebrew/bin:$PATH
 
@@ -40,11 +52,6 @@ export PATH=$PATH:$GOBIN
 # scala
 export PATH=$PATH:"$HOME/Library/Application Support/Coursier/bin"
 
-# Aliases
-alias vi="nvim"
-alias vim="nvim"
-alias zshconfig="vim $HOME/.zshrc"
-
 # gcloud
 if [ -f '/Users/kevinsookocheff/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kevinsookocheff/google-cloud-sdk/path.zsh.inc'; fi
 if [ -f '/Users/kevinsookocheff/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kevinsookocheff/google-cloud-sdk/completion.zsh.inc'; fi
@@ -63,3 +70,4 @@ export PATH="/opt/homebrew/opt/go@1.16/bin:$PATH"
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 export PATH=$PATH:"$HOME/bin"
+
