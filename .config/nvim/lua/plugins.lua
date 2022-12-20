@@ -45,6 +45,13 @@ return require('packer').startup(function(use)
   }
   use 'godlygeek/tabular'
   use {
+    'goolord/alpha-nvim',
+    requires = { 'nvim-tree/nvim-web-devicons' },
+    config = function ()
+        require('alpha').setup(require'alpha.themes.startify'.config)
+    end
+  }
+  use {
     'hrsh7th/nvim-cmp',
     requires = {
       'hrsh7th/cmp-nvim-lsp',
@@ -56,15 +63,16 @@ return require('packer').startup(function(use)
     config = function() require('config/nvim-cmp') end,
   }
   use {
-    'kyazdani42/nvim-tree.lua',
-    requires = {
-      'kyazdani42/nvim-web-devicons'
-    },
-    tag = 'nightly', -- optional, updated every week. (see issue #1193)
-    config = function() require('config/nvim-tree') end,
+    'j-hui/fidget.nvim',
+    config = function ()
+      require('fidget').setup()
+    end
   }
   use 'ludovicchabant/vim-gutentags'
-  use 'mfussenegger/nvim-dap'
+  use {
+    'mfussenegger/nvim-dap',
+    config = function() require('config/nvim-dap') end,
+  }
   use 'mfussenegger/nvim-jdtls'
   use {
     'navarasu/onedark.nvim',
@@ -80,6 +88,23 @@ return require('packer').startup(function(use)
       require('lualine').setup {
         options = { theme = 'onedark' },
       }
+    end
+  }
+  use {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function ()
+      require("neo-tree").setup({
+        filesystem = {
+          follow_current_file = true,
+          use_libuv_file_watcher = true,
+        }
+      })
     end
   }
   use {

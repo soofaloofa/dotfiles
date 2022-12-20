@@ -49,14 +49,14 @@ autocmd('BufEnter', {
 -- })
 
 -- Enter insert mode when switching to terminal
-autocmd('TermOpen', {
-  command = 'setlocal listchars= nonumber norelativenumber nocursorline',
-})
-
-autocmd('TermOpen', {
-  pattern = '',
-  command = 'startinsert'
-})
+-- autocmd('TermOpen', {
+--   command = 'setlocal listchars= nonumber norelativenumber nocursorline',
+-- })
+--
+-- autocmd('TermOpen', {
+--   pattern = '',
+--   command = 'startinsert'
+-- })
 
 -- Close terminal buffer on process exit
 autocmd('BufLeave', {

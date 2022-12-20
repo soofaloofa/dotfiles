@@ -62,14 +62,8 @@ require("which-key").register({
 -- symbols-outline
 remap("n", "<leader>o", "<cmd>SymbolsOutline<cr>", bufopts, "Show symbols")
 
--- nvim-tree
-remap("n", "<leader>nn", "<cmd>NvimTreeToggle<cr>", bufopts, "Open file browser")
-remap("n", "<leader>nf", "<cmd>NvimTreeFindFile<cr>", bufopts, "Find in file browser")
-require("which-key").register({
-  n = {
-    name = "files",
-  },
-}, { prefix = "<leader>" })
+-- neo-tree
+remap("n", "<leader>n", "<cmd>Neotree toggle float<cr>", bufopts, "Open file browser")
 
 -- vim-test
 remap("n", "<leader>vt", "<cmd>TestNearest<cr>", bufopts, "Test nearest")
@@ -95,7 +89,7 @@ require("which-key").register({
   },
 }, { prefix = "<leader>" })
 
-remap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", bofopts, "Continue")
+remap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", bufopts, "Continue")
 remap("n", "<leader>dj", "<cmd>lua require'dap'.step_over()<cr>", bufopts, "Step over")
 remap("n", "<leader>dk", "<cmd>lua require'dap'.step_into()<cr>", bufopts, "Step into")
 remap("n", "<leader>do", "<cmd>lua require'dap'.step_out()<cr>", bufopts, "Step out")
@@ -110,11 +104,5 @@ remap("n", "<leader>dh", "<cmd>Telescope dap commands<cr>", bufopts, "List comma
 require("which-key").register({
   d = {
     name = "debug",
-  },
-}, { prefix = "<leader>" })
-
-require("which-key").register({
-  m = {
-    name = "marks",
   },
 }, { prefix = "<leader>" })

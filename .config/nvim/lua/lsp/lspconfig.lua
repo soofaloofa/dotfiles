@@ -28,6 +28,3 @@ lspconfig.sumneko_lua.setup {
     }
   }
 }
-
-require('dap.ext.vscode').load_launchjs()
-
