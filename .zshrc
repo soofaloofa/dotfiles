@@ -4,7 +4,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# oh-my-zsh 
+# oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git colorize extract macos)
@@ -18,6 +18,16 @@ alias vi="nvim"
 alias vim="nvim"
 alias zshconfig="vim $HOME/.zshrc"
 
+alias preview='open -a "${PREVIEW?}"'
+alias f='open -a Finder .'
+alias next='music next'
+alias prev='music previous'
+alias pause='music pause'
+alias play='music play'
+alias song='music playing'
+alias mute='music mute'
+alias unmute='music unmute'
+
 # Functions
 function rsdoc() {
   docker-compose -f docker-compose.yml stop $1
@@ -28,7 +38,7 @@ function rsdoc() {
 # Homebrew
 export PATH=/opt/homebrew/bin:$PATH
 
-# Jump 
+# Jump
 eval "$(jump shell)"
 
 # fzf
