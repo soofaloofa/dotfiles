@@ -103,6 +103,11 @@ return require('packer').startup(function(use)
         filesystem = {
           follow_current_file = true,
           use_libuv_file_watcher = true,
+        },
+        window = {
+          mappings = {
+            ["o"] = "open",
+          }
         }
       })
     end
@@ -121,6 +126,30 @@ return require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
     config = function() require('config/nvim-treesitter') end,
+  }
+  use {
+    'preservim/vim-pencil',
+    requires = {
+      'preservim/vim-litecorrect',
+      'kana/vim-textobj-user',
+      'preservim/vim-textobj-quote',
+      'preservim/vim-textobj-sentence',
+    },
+    config = function()
+      local augroup = vim.api.nvim_create_augroup
+      local autocmd = vim.api.nvim_create_autocmd
+      augroup('pencil', { clear = true })
+      autocmd('FileType', {
+        group = 'pencil',
+        pattern = { "markdown" ,"text" },
+        callback = function()
+          vim.cmd("call pencil#init()")
+          vim.cmd("call litecorrect#init()")
+          vim.cmd("call textobj#quote#init()")
+          vim.cmd("call textobj#sentence#init()")
+        end
+      })
+    end
   }
   use {
     'simrat39/symbols-outline.nvim',

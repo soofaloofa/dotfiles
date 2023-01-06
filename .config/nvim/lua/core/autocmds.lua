@@ -63,4 +63,3 @@ autocmd('BufLeave', {
   pattern = 'term://*',
   command = 'stopinsert'
 })
-

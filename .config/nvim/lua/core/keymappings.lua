@@ -32,6 +32,15 @@ require("which-key").register({
 remap("n", "<C-S-Right>", "<cmd>:vertical resize -1<cr>", bufopts, "Minimize window")
 remap("n", "<C-S-Left>", "<cmd>:vertical resize +1<cr>", bufopts, "Maximize window")
 
+-- formatting
+remap("n", "Q", "gqap", bufopts, "Format paragraph")
+remap("x", "Q", "gq", bufopts, "Format paragraph")
+remap("n", "<leader>Q", "vapJgqap", bufopts, "Merge paragraphs")
+
+-- vim-pencil
+vim.keymap.set("n", "<leader>qc", "<Plug>ReplaceWithCurly")
+vim.keymap.set("n", "<leader>qs", "<Plug>ReplaceWithStraight")
+
 -- telescope
 remap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", bufopts, "Find file")
 remap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", bufopts, "Grep")

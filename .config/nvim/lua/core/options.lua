@@ -34,6 +34,7 @@ opt.history = 1000
 opt.startofline = true
 opt.backspace = "indent,eol,start" -- backspace works on every char in insert mode
 opt.clipboard = 'unnamedplus'
+opt.textwidth = 73
 
 -- wait time
 -- opt.timeout = false
