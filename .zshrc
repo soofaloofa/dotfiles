@@ -51,13 +51,16 @@ export GPG_TTY=$(tty)
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
 # go
-export GOPRIVATE=github.com/Workiva/*
-export GOPATH=$(go env GOPATH)
-export GOROOT=$(go env GOROOT)
-export GOBIN=$(go env GOBIN)
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
-export PATH=$PATH:$GOBIN
+if command -v go &> /dev/null
+then
+  export GOPRIVATE=github.com/Workiva/*
+  export GOPATH=$(go env GOPATH)
+  export GOROOT=$(go env GOROOT)
+  export GOBIN=$(go env GOBIN)
+  export PATH=$PATH:$GOPATH/bin
+  export PATH=$PATH:$GOROOT/bin
+  export PATH=$PATH:$GOBIN
+fi
 
 # scala
 export PATH=$PATH:"$HOME/Library/Application Support/Coursier/bin"
@@ -66,18 +69,26 @@ export PATH=$PATH:"$HOME/Library/Application Support/Coursier/bin"
 if [ -f '/Users/kevinsookocheff/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kevinsookocheff/google-cloud-sdk/path.zsh.inc'; fi
 if [ -f '/Users/kevinsookocheff/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kevinsookocheff/google-cloud-sdk/completion.zsh.inc'; fi
 
-# mongo
-export PATH="/opt/homebrew/opt/mongodb-community@4.4/bin:$PATH"
-
 # asdf
-source /opt/homebrew/opt/asdf/libexec/asdf.sh
-source ~/.asdf/plugins/java/set-java-home.zsh
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+if [ -f '/opt/homebrew/opt/asdf/libexec/asdf.sh' ]; then
+  source /opt/homebrew/opt/asdf/libexec/asdf.sh
+fi
+if [ -f '~/.asdf/plugins/java/set-java-home.zsh' ]; then
+  source ~/.asdf/plugins/java/set-java-home.zsh
+fi
+if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ]; then
+  source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+fi
 
 # wk
-source ~/.wk/profile
-export PATH="/opt/homebrew/opt/go@1.16/bin:$PATH"
+if [ -f "~/.wk/profile" ]; then
+  source ~/.wk/profile
+fi
+
+# dart
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 export PATH=$PATH:"$HOME/bin"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
