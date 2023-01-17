@@ -12,7 +12,7 @@ local usercmd = vim.api.nvim_create_user_command   -- Create usercommand
 -- General settings:
 --------------------
 
--- use open instead of netrw
+-- use Open instead of netrw
 usercmd(
   'Browse',
   "silent execute '!open' shellescape(<q-args>,1)",

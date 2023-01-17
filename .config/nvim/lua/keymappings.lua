@@ -71,8 +71,8 @@ require("which-key").register({
 -- symbols-outline
 remap("n", "<leader>o", "<cmd>SymbolsOutline<cr>", bufopts, "Show symbols")
 
--- neo-tree
-remap("n", "<leader>n", "<cmd>Neotree toggle float<cr>", bufopts, "Open file browser")
+-- nvim-tree
+remap("n", "<leader>n", "<cmd>NvimTreeToggle<cr>", bufopts, "Open file browser")
 
 -- vim-test
 remap("n", "<leader>vt", "<cmd>TestNearest<cr>", bufopts, "Test nearest")

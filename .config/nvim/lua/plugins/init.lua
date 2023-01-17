@@ -83,28 +83,6 @@ return {
     end
   },
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
-    },
-    config = function ()
-      require("neo-tree").setup({
-        filesystem = {
-          follow_current_file = true,
-          use_libuv_file_watcher = true,
-        },
-        window = {
-          mappings = {
-            ["o"] = "open",
-          }
-        }
-      })
-    end
-  },
-  {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
     dependencies = {
@@ -113,6 +91,10 @@ return {
       'nvim-telescope/telescope-ui-select.nvim',
     },
     config = function() require('config/telescope') end,
+  },
+  {
+    'nvim-tree/nvim-tree.lua',
+    config = function() require('config/nvim-tree') end,
   },
   {
     'nvim-treesitter/nvim-treesitter',
