@@ -37,9 +37,16 @@ remap("n", "Q", "gqap", bufopts, "Format paragraph")
 remap("x", "Q", "gq", bufopts, "Format paragraph")
 remap("n", "<leader>Q", "vapJgqap", bufopts, "Merge paragraphs")
 
+--
+-- Plugins
+--
+
+-- vim-marked
+remap("n", "<leader>mo", "<cmd>MarkedOpen<cr>", bufopts, "Open marked")
+
 -- vim-pencil
-vim.keymap.set("n", "<leader>qc", "<Plug>ReplaceWithCurly")
-vim.keymap.set("n", "<leader>qs", "<Plug>ReplaceWithStraight")
+remap("n", "<leader>qc", "<Plug>ReplaceWithCurly", bufopts, "Curl quotes")
+remap("n", "<leader>qs", "<Plug>ReplaceWithStraight", bufopts, "Straighten quotes")
 
 -- telescope
 remap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", bufopts, "Find file")
@@ -72,7 +79,8 @@ require("which-key").register({
 remap("n", "<leader>o", "<cmd>SymbolsOutline<cr>", bufopts, "Show symbols")
 
 -- nvim-tree
-remap("n", "<leader>n", "<cmd>NvimTreeToggle<cr>", bufopts, "Open file browser")
+remap("n", "<leader>nn", "<cmd>NvimTreeToggle<cr>", bufopts, "Open file browser")
+remap("n", "<leader>nf", "<cmd>NvimTreeFindFileToggle<cr>", bufopts, "Find file in browser")
 
 -- vim-test
 remap("n", "<leader>vt", "<cmd>TestNearest<cr>", bufopts, "Test nearest")

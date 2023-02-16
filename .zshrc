@@ -7,7 +7,7 @@ fi
 # oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=(git colorize extract macos)
+plugins=(git colorize extract macos common-aliases kubectl)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -17,16 +17,6 @@ export LANG="en_US.UTF-8"
 alias vi="nvim"
 alias vim="nvim"
 alias zshconfig="vim $HOME/.zshrc"
-
-alias preview='open -a "${PREVIEW?}"'
-alias f='open -a Finder .'
-alias next='music next'
-alias prev='music previous'
-alias pause='music pause'
-alias play='music play'
-alias song='music playing'
-alias mute='music mute'
-alias unmute='music unmute'
 
 # Functions
 function rsdoc() {
@@ -80,15 +70,23 @@ if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ]; then
   source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 fi
 
-# wk
-if [ -f "~/.wk/profile" ]; then
-  source ~/.wk/profile
-fi
+# # wk
+# if [ -f "$HOME/.wk/profile" ]; then
+#   source $HOME/.wk/profile
+# fi
+
+# kubernetes
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export KUBECONFIG=$HOME/.kube/kubeconfigs.yaml
+export KUBE_CONFIG_PATH=$HOME/.kube/kubeconfigs.yaml
 
 # dart
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
-export PATH=$PATH:"$HOME/bin"
-
+# iTerm
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# home
+export PATH=$PATH:"$HOME/bin"
 

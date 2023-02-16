@@ -8,6 +8,7 @@ return {
     end
   },
   'godlygeek/tabular',
+  'itspriddle/vim-marked',
   'ludovicchabant/vim-gutentags',
   'mfussenegger/nvim-jdtls',
   'neovim/nvim-lspconfig',
@@ -117,7 +118,7 @@ return {
         group = 'pencil',
         pattern = { "markdown" ,"text" },
         callback = function()
-          vim.cmd("call pencil#init()")
+          vim.cmd("call pencil#init({'wrap': 'hard'})")
           vim.cmd("call litecorrect#init()")
           vim.cmd("call textobj#quote#init()")
           vim.cmd("call textobj#sentence#init()")
