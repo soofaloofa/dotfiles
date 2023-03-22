@@ -43,7 +43,6 @@ return {
   },
   {
     'goolord/alpha-nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function ()
         require('alpha').setup(require'alpha.themes.startify'.config)
     end
@@ -94,8 +93,7 @@ return {
     config = function() require('config/telescope') end,
   },
   {
-    'nvim-tree/nvim-tree.lua',
-    config = function() require('config/nvim-tree') end,
+    'nvim-tree/nvim-web-devicons',
   },
   {
     'nvim-treesitter/nvim-treesitter',
@@ -134,4 +132,10 @@ return {
       }
     end
   },
+  {
+    'stevearc/oil.nvim',
+    config = function()
+      require("oil").setup({})
+    end
+  }
 }

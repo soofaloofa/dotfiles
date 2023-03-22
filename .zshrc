@@ -43,7 +43,8 @@ export CARGO_NET_GIT_FETCH_WITH_CLI=true
 # go
 if command -v go &> /dev/null
 then
-  export GOPRIVATE=github.com/Workiva/*
+  export GO111MODULE="on"  # forces modules on working directories within GOPATH
+  export GOPRIVATE=github.com/Workiva
   export GOPATH=$(go env GOPATH)
   export GOROOT=$(go env GOROOT)
   export GOBIN=$(go env GOBIN)
@@ -51,9 +52,6 @@ then
   export PATH=$PATH:$GOROOT/bin
   export PATH=$PATH:$GOBIN
 fi
-
-# scala
-export PATH=$PATH:"$HOME/Library/Application Support/Coursier/bin"
 
 # gcloud
 if [ -f '/Users/kevinsookocheff/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kevinsookocheff/google-cloud-sdk/path.zsh.inc'; fi
@@ -70,11 +68,6 @@ if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ]; then
   source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 fi
 
-# # wk
-# if [ -f "$HOME/.wk/profile" ]; then
-#   source $HOME/.wk/profile
-# fi
-
 # kubernetes
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -87,6 +80,10 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 # iTerm
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# home
-export PATH=$PATH:"$HOME/bin"
+# Secrets
+if [ -f "$HOME/bin/secrets" ]; then
+   source $HOME/bin/secrets
+fi
 
+# Home
+export PATH=$PATH:"$HOME/bin"

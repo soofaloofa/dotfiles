@@ -34,11 +34,11 @@ autocmd('BufWritePre', {
   command = ":%s/\\s\\+$//e"
 })
 
--- Don't auto comment new lines
-autocmd('BufEnter', {
-  pattern = '',
-  command = 'set fo-=c fo-=r fo-=o'
-})
+-- -- Don't auto comment new lines
+-- autocmd('BufEnter', {
+--   pattern = '',
+--   command = 'set fo-=c fo-=r fo-=o'
+-- })
 
 -- Terminal settings:
 ---------------------

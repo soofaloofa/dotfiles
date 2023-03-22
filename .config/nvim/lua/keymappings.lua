@@ -78,9 +78,8 @@ require("which-key").register({
 -- symbols-outline
 remap("n", "<leader>o", "<cmd>SymbolsOutline<cr>", bufopts, "Show symbols")
 
--- nvim-tree
-remap("n", "<leader>nn", "<cmd>NvimTreeToggle<cr>", bufopts, "Open file browser")
-remap("n", "<leader>nf", "<cmd>NvimTreeFindFileToggle<cr>", bufopts, "Find file in browser")
+-- oil
+remap("n", "<leader>n", "<cmd>Oil<cr>", bufopts, "Oil")
 
 -- vim-test
 remap("n", "<leader>vt", "<cmd>TestNearest<cr>", bufopts, "Test nearest")
