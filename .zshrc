@@ -19,10 +19,8 @@ alias vim="nvim"
 alias zshconfig="vim $HOME/.zshrc"
 
 # Functions
-function rsdoc() {
-  docker-compose -f docker-compose.yml stop $1
-  docker-compose -f docker-compose.yml rm -f $1
-  docker-compose -f docker-compose.yml up -d $1
+function portkill() {
+  kill -9 $(sudo lsof -i :$1 | tail -1 | awk '{print $2}')
 }
 
 # Homebrew
@@ -35,7 +33,7 @@ eval "$(jump shell)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # gpg
-export GPG_TTY=$(tty)
+export GPG_TTY=$TTY
 
 # rust
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
@@ -52,6 +50,9 @@ then
   export PATH=$PATH:$GOROOT/bin
   export PATH=$PATH:$GOBIN
 fi
+
+# java
+export JDTLS_JVM_ARGS="-javaagent:$HOME/.local/share/java/lombok.jar"
 
 # gcloud
 if [ -f '/Users/kevinsookocheff/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kevinsookocheff/google-cloud-sdk/path.zsh.inc'; fi
@@ -71,8 +72,6 @@ fi
 # kubernetes
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-export KUBECONFIG=$HOME/.kube/kubeconfigs.yaml
-export KUBE_CONFIG_PATH=$HOME/.kube/kubeconfigs.yaml
 
 # dart
 export PATH="$PATH":"$HOME/.pub-cache/bin"
@@ -80,10 +79,12 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 # iTerm
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# Secrets
-if [ -f "$HOME/bin/secrets" ]; then
-   source $HOME/bin/secrets
+# wk
+if [ -f "$HOME/.wk/profile" ]; then
+  source $HOME/.wk/profile
+  export KUBECONFIG=~/.wk/config/eks.yaml:~/.kube/kind-config.yaml
 fi
 
 # Home
 export PATH=$PATH:"$HOME/bin"
+source $HOME/.secrets

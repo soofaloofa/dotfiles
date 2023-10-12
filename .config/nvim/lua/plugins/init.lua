@@ -10,6 +10,7 @@ return {
   'godlygeek/tabular',
   'itspriddle/vim-marked',
   'ludovicchabant/vim-gutentags',
+  'leafOfTree/vim-svelte-plugin',
   'mfussenegger/nvim-jdtls',
   'neovim/nvim-lspconfig',
   'nvim-lua/plenary.nvim',
@@ -59,12 +60,6 @@ return {
     config = function() require('config/nvim-cmp') end,
   },
   {
-    'j-hui/fidget.nvim',
-    config = function ()
-      require('fidget').setup()
-    end
-  },
-  {
     'mfussenegger/nvim-dap',
     config = function() require('config/nvim-dap') end,
   },
@@ -95,11 +90,11 @@ return {
   {
     'nvim-tree/nvim-web-devicons',
   },
-  {
-    'nvim-treesitter/nvim-treesitter',
-    build = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-    config = function() require('config/nvim-treesitter') end,
-  },
+  -- {
+  --   'nvim-treesitter/nvim-treesitter',
+  --   build = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+  --   config = function() require('config/nvim-treesitter') end,
+  -- },
   {
     'preservim/vim-pencil',
     dependencies = {
@@ -135,7 +130,9 @@ return {
   {
     'stevearc/oil.nvim',
     config = function()
-      require("oil").setup({})
+      require("oil").setup({
+        skip_confirm_for_simple_edits = true,
+      })
     end
   }
 }
