@@ -52,7 +52,7 @@ then
 fi
 
 # java
-export JDTLS_JVM_ARGS="-javaagent:$HOME/.local/share/java/lombok.jar"
+export JDTLS_JVM_ARGS="-javaagent:$HOME/.local/share/eclipse/lombok.jar"
 
 # gcloud
 if [ -f '/Users/kevinsookocheff/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kevinsookocheff/google-cloud-sdk/path.zsh.inc'; fi
