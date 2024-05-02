@@ -10,8 +10,6 @@ return {
   'godlygeek/tabular',
   'itspriddle/vim-marked',
   'ludovicchabant/vim-gutentags',
-  'leafOfTree/vim-svelte-plugin',
-  'mfussenegger/nvim-jdtls',
   'neovim/nvim-lspconfig',
   'nvim-lua/plenary.nvim',
   'tpope/vim-commentary',
@@ -23,19 +21,12 @@ return {
   'tyru/open-browser.vim',
   'andymass/vim-matchup',
   'vim-test/vim-test',
-  'weirongxu/plantuml-previewer.vim',
   {
     'folke/trouble.nvim',
     config = function()
       require("trouble").setup({
         mode = "document_diagnostics"
       })
-    end
-  },
-  {
-    'folke/which-key.nvim',
-    config = function()
-      require("which-key").setup()
     end
   },
   {
@@ -60,10 +51,6 @@ return {
     config = function() require('config/nvim-cmp') end,
   },
   {
-    'mfussenegger/nvim-dap',
-    config = function() require('config/nvim-dap') end,
-  },
-  {
     'navarasu/onedark.nvim',
     config = function()
       require('onedark').load()
@@ -71,6 +58,9 @@ return {
   },
   {
     'nvim-lualine/lualine.nvim',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
     config = function()
       require('lualine').setup {
         options = { theme = 'onedark' },
@@ -81,7 +71,6 @@ return {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
     dependencies = {
-      'nvim-telescope/telescope-dap.nvim',
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       'nvim-telescope/telescope-ui-select.nvim',
     },
@@ -90,11 +79,6 @@ return {
   {
     'nvim-tree/nvim-web-devicons',
   },
-  -- {
-  --   'nvim-treesitter/nvim-treesitter',
-  --   build = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-  --   config = function() require('config/nvim-treesitter') end,
-  -- },
   {
     'preservim/vim-pencil',
     dependencies = {

@@ -65,24 +65,24 @@ fi
 if [ -f '~/.asdf/plugins/java/set-java-home.zsh' ]; then
   source ~/.asdf/plugins/java/set-java-home.zsh
 fi
-if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ]; then
-  source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-fi
 
 # kubernetes
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # dart
-export PATH="$PATH":"$HOME/.pub-cache/bin"
+export PATH="$PATH:$HOME/.pub-cache/bin"
 
 # iTerm
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# Add Visual Studio Code (code)
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
 # wk
 if [ -f "$HOME/.wk/profile" ]; then
   source $HOME/.wk/profile
-  export KUBECONFIG=~/.wk/config/eks.yaml:~/.kube/kind-config.yaml
+  export KUBECONFIG=~/.wk/config/eks.yaml
 fi
 
 # Home

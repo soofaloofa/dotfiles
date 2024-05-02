@@ -31,20 +31,6 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local lspconfig = require('lspconfig')
 
-lspconfig['dartls'].setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-lspconfig['jdtls'].setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  -- init_options = {
-  --   jvm_args = {},
-  --   workspace = "/home/user/.cache/jdtls/workspace"
-  -- }
-}
-
 lspconfig['lua_ls'].setup {
   on_init = function(client)
     local path = client.workspace_folders[1].name
@@ -110,6 +96,11 @@ lspconfig['pyright'].setup {
       },
     },
   }
+}
+
+lspconfig['rust_analyzer'].setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
 }
 
 lspconfig['solargraph'].setup {

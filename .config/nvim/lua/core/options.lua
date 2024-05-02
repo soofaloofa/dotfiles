@@ -8,7 +8,7 @@ local opt = vim.opt
 local opt_global = vim.opt_global
 
 
--- disable language provider support (lua and vimscript plugins only)
+-- disable language provider support (use lua and vimscript plugins only)
 g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
 g.loaded_node_provider = 0
