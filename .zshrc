@@ -16,7 +16,7 @@ export LANG="en_US.UTF-8"
 # Aliases
 alias vi="nvim"
 alias vim="nvim"
-alias zshconfig="vim $HOME/.zshrc"
+alias zshconfig="nvim $HOME/.zshrc"
 
 # Functions
 function portkill() {
@@ -24,7 +24,7 @@ function portkill() {
 }
 
 # Homebrew
-export PATH=/opt/homebrew/bin:$PATH
+export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 
 # Jump
 eval "$(jump shell)"
@@ -54,24 +54,18 @@ fi
 # java
 export JDTLS_JVM_ARGS="-javaagent:$HOME/.local/share/eclipse/lombok.jar"
 
-# gcloud
-if [ -f '/Users/kevinsookocheff/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kevinsookocheff/google-cloud-sdk/path.zsh.inc'; fi
-if [ -f '/Users/kevinsookocheff/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kevinsookocheff/google-cloud-sdk/completion.zsh.inc'; fi
-
-# asdf
-if [ -f '/opt/homebrew/opt/asdf/libexec/asdf.sh' ]; then
-  source /opt/homebrew/opt/asdf/libexec/asdf.sh
-fi
-if [ -f '~/.asdf/plugins/java/set-java-home.zsh' ]; then
-  source ~/.asdf/plugins/java/set-java-home.zsh
-fi
-
 # kubernetes
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+# cdk
+export JSII_SILENCE_WARNING_UNTESTED_NODE_VERSION=true
+
 # dart
 export PATH="$PATH:$HOME/.pub-cache/bin"
+
+# fnm (node)
+eval "$(fnm env --use-on-cd --shell zsh)"
 
 # iTerm
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -82,9 +76,7 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 # wk
 if [ -f "$HOME/.wk/profile" ]; then
   source $HOME/.wk/profile
-  export KUBECONFIG=~/.wk/config/eks.yaml
 fi
 
 # Home
-export PATH=$PATH:"$HOME/bin"
-source $HOME/.secrets
+export PATH=$PATH:"$HOME/bin:$HOME/.local/bin"

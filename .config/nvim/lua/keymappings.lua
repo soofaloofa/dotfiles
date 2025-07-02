@@ -56,9 +56,9 @@ remap("n", "<leader>fi", "<cmd>Telescope lsp_implementations<cr>", bufopts, "Fin
 remap("n", "<leader>fx", "<cmd>Telescope diagnostics bufnr=0<cr>", bufopts, "Find errors (LSP)")
 
 -- trouble
-remap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", bufopts, "Display errors")
-remap("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", bufopts, "Display workspace errors")
-remap("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", bufopts, "Display document errors")
+remap("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", bufopts, "Display errors")
+-- remap("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", bufopts, "Display workspace errors")
+-- remap("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", bufopts, "Display document errors")
 
 -- symbols-outline
 remap("n", "<leader>o", "<cmd>SymbolsOutline<cr>", bufopts, "Show symbols")

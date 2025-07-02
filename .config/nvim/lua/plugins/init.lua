@@ -1,17 +1,25 @@
 return {
-  'aklt/plantuml-syntax',
+  'andymass/vim-matchup',
   'bronson/vim-visual-star-search',
   {
     'chentoast/marks.nvim',
-    config = function ()
-      require("marks").setup()
-    end
+    event = "VeryLazy",
+    opts = {},
   },
   'godlygeek/tabular',
   'itspriddle/vim-marked',
   'ludovicchabant/vim-gutentags',
   'neovim/nvim-lspconfig',
   'nvim-lua/plenary.nvim',
+  'nvim-tree/nvim-web-devicons',
+  {
+    'nvimdev/dashboard-nvim',
+    event = 'VimEnter',
+    config = function()
+      require('dashboard').setup {
+      }
+    end,
+  },
   'tpope/vim-commentary',
   'tpope/vim-fugitive',
   'tpope/vim-repeat',
@@ -19,7 +27,6 @@ return {
   'tpope/vim-surround',
   'tpope/vim-unimpaired',
   'tyru/open-browser.vim',
-  'andymass/vim-matchup',
   'vim-test/vim-test',
   {
     'folke/trouble.nvim',
@@ -34,16 +41,11 @@ return {
     config = function() require('config/wilder') end,
   },
   {
-    'goolord/alpha-nvim',
-    config = function ()
-        require('alpha').setup(require'alpha.themes.startify'.config)
-    end
-  },
-  {
     'hrsh7th/nvim-cmp',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-path',
       'hrsh7th/cmp-vsnip',
       'hrsh7th/vim-vsnip',
       'onsails/lspkind.nvim',
@@ -77,9 +79,6 @@ return {
     config = function() require('config/telescope') end,
   },
   {
-    'nvim-tree/nvim-web-devicons',
-  },
-  {
     'preservim/vim-pencil',
     dependencies = {
       'preservim/vim-litecorrect',
@@ -104,19 +103,13 @@ return {
     end
   },
   {
-    'simrat39/symbols-outline.nvim',
-    config = function()
-      require("symbols-outline").setup {
-        auto_close = true,
-      }
-    end
-  },
-  {
     'stevearc/oil.nvim',
     config = function()
       require("oil").setup({
+        default_file_explorer = true,
+        delete_to_trash = true,
         skip_confirm_for_simple_edits = true,
       })
     end
-  }
+  },
 }
