@@ -29,9 +29,7 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-local lspconfig = require('lspconfig')
-
-lspconfig['ltex'].setup {
+vim.lsp.config('ltex', {
   on_attach = on_attach,
   capabilities = capabilities,
   filetypes = { "bib", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc" },
@@ -40,9 +38,9 @@ lspconfig['ltex'].setup {
       language = "en-CA",
     }
   }
-}
+})
 
-lspconfig['gopls'].setup {
+vim.lsp.config('gopls', {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -53,9 +51,9 @@ lspconfig['gopls'].setup {
       staticcheck = true,
     },
   }
-}
+})
 
-lspconfig['pyright'].setup {
+vim.lsp.config('pyright', {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -65,19 +63,14 @@ lspconfig['pyright'].setup {
       },
     },
   }
-}
+})
 
-lspconfig['rust_analyzer'].setup{
+vim.lsp.config('rust_analyzer', {
   on_attach = on_attach,
   capabilities = capabilities,
-}
+})
 
-lspconfig['solargraph'].setup {
+vim.lsp.config('ts_ls', {
   on_attach = on_attach,
   capabilities = capabilities,
-}
-
-lspconfig['ts_ls'].setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+})
