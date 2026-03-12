@@ -1,14 +1,16 @@
-# Powerlevel 10k
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 # oh-my-zsh
+DEFAULT_USER="$USER"
 export ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git colorize extract macos common-aliases kubectl)
 source $ZSH/oh-my-zsh.sh
+
+# Homebrew
+export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
+
+# pure theme https://github.com/sindresorhus/pure
+fpath+=("$(brew --prefix)/share/zsh/site-functions")
+autoload -U promptinit; promptinit
+prompt pure
 
 # User configuration
 export LANG="en_US.UTF-8"
@@ -23,8 +25,6 @@ function portkill() {
   kill -9 $(sudo lsof -i :$1 | tail -1 | awk '{print $2}')
 }
 
-# Homebrew
-export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 
 # Jump
 eval "$(jump shell)"

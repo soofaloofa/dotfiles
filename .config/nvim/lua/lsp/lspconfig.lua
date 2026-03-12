@@ -29,17 +29,6 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-vim.lsp.config('ltex', {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  filetypes = { "bib", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc" },
-  settings = {
-    ltex = {
-      language = "en-CA",
-    }
-  }
-})
-
 vim.lsp.config('gopls', {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -52,6 +41,7 @@ vim.lsp.config('gopls', {
     },
   }
 })
+vim.lsp.enable('gopls')
 
 vim.lsp.config('pyright', {
   on_attach = on_attach,
@@ -64,13 +54,16 @@ vim.lsp.config('pyright', {
     },
   }
 })
+vim.lsp.enable('pyright')
 
 vim.lsp.config('rust_analyzer', {
   on_attach = on_attach,
   capabilities = capabilities,
 })
+vim.lsp.enable('rust_analyzer')
 
 vim.lsp.config('ts_ls', {
   on_attach = on_attach,
   capabilities = capabilities,
 })
+vim.lsp.enable('ts_ls')

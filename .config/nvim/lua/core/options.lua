@@ -34,6 +34,7 @@ opt.history = 1000
 opt.startofline = true
 opt.clipboard = 'unnamedplus'
 opt.textwidth = 73
+opt.maxmempattern = 2000000
 
 -- wait time
 -- opt.timeout = false
