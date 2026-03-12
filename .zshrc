@@ -1,7 +1,7 @@
 # oh-my-zsh
 DEFAULT_USER="$USER"
 export ZSH=$HOME/.oh-my-zsh
-plugins=(git colorize extract macos common-aliases kubectl)
+plugins=(git colorize extract macos common-aliases kubectl kube-ps1)
 source $ZSH/oh-my-zsh.sh
 
 # Homebrew
@@ -11,6 +11,7 @@ export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
 autoload -U promptinit; promptinit
 prompt pure
+RPROMPT='$(kube_ps1)'
 
 # User configuration
 export LANG="en_US.UTF-8"
@@ -33,6 +34,7 @@ export GPG_TTY=$TTY
 if command -v go &> /dev/null
 then
   export GO111MODULE="on"  # forces modules on working directories within GOPATH
+  export GOPRIVATE=github.com/Workiva
   export GOPATH=$(go env GOPATH)
   export GOROOT=$(go env GOROOT)
   export GOBIN=$(go env GOBIN)
@@ -45,16 +47,18 @@ fi
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+# fnm (node)
+eval "$(fnm env --use-on-cd --shell zsh)"
+
 # iTerm
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# Add VS code
+# Add VS Code (code)
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # wk
 if [ -f "$HOME/.wk/profile" ]; then
   source $HOME/.wk/profile
-  export GOPRIVATE=github.com/Workiva
 fi
 
 # Home
