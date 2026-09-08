@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+#
+# gentags - regenerate a ctags file for the current project.
+#
+# Usage: gentags [dir] [-- ctags-args...]
+#
+#   dir            Directory to tag (default: current directory)
+#   ctags-args...  Extra arguments passed through to ctags, e.g.:
+#                    gentags -- --languages=Python,Go
+#
+# Defaults to tagging Python, TypeScript, Go, and Java; pass your
+# own --languages in ctags-args to override.
+#
+# Reads exclude patterns from a .gentagsignore file in the target
+# directory (one pattern per line, blank lines and #-comments ignored),
+# falling back to a sensible default set of common junk directories.
+
+set -euo pipefail
+
+target_dir="."
+if [[ $# -gt 0 && "$1" != "--" ]]; then
+	target_dir="$1"
+	shift
+fi
+if [[ "${1:-}" == "--" ]]; then
+	shift
+fi
+
+if ! command -v ctags >/dev/null 2>&1; then
+	echo "gentags: ctags not found on PATH (try: brew install universal-ctags)" >&2
+	exit 1
+fi
+
+default_languages="Python,TypeScript,Go,Java"
+
+language_args=()
+has_languages=false
+for arg in "$@"; do
+	if [[ "$arg" == --languages=* || "$arg" == --languages ]]; then
+		has_languages=true
+		break
+	fi
+done
+if [[ "$has_languages" == false ]]; then
+	language_args+=(--languages="$default_languages")
+fi
+
+default_excludes=(
+	.git
+	.venv
+	venv
+	node_modules
+	lib
+	build
+	dist
+	target
+	vendor
+	.tox
+	.mypy_cache
+	.pytest_cache
+	'*.min.js'
+)
+
+ignore_file="$target_dir/.gentagsignore"
+excludes=()
+if [[ -f "$ignore_file" ]]; then
+	while IFS= read -r pattern; do
+		[[ -z "$pattern" || "$pattern" == \#* ]] && continue
+		excludes+=("$pattern")
+	done <"$ignore_file"
+else
+	excludes=("${default_excludes[@]}")
+fi
+
+exclude_args=()
+for pattern in "${excludes[@]}"; do
+	exclude_args+=(--exclude="$pattern")
+done
+
+rm -f "$target_dir/tags"
+ctags -R "${language_args[@]}" "${exclude_args[@]}" "$@" "$target_dir"
+
+echo "gentags: wrote $target_dir/tags"
