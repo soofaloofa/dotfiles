@@ -8,7 +8,6 @@ return {
   },
   'godlygeek/tabular',
   'itspriddle/vim-marked',
-  'ludovicchabant/vim-gutentags',
   'neovim/nvim-lspconfig',
   'nvim-lua/plenary.nvim',
   'nvim-tree/nvim-web-devicons',
@@ -26,36 +25,51 @@ return {
   'tpope/vim-rhubarb',
   'tpope/vim-surround',
   'tpope/vim-unimpaired',
-  'tyru/open-browser.vim',
   'vim-test/vim-test',
   {
     'folke/trouble.nvim',
-    config = function()
-      require("trouble").setup({
-        mode = "document_diagnostics"
-      })
-    end
+    opts = {},
   },
   {
     'gelguy/wilder.nvim',
     config = function() require('config/wilder') end,
   },
   {
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-vsnip',
-      'hrsh7th/vim-vsnip',
-      'onsails/lspkind.nvim',
-    },
-    config = function() require('config/nvim-cmp') end,
+    'saghen/blink.cmp',
+    dependencies = { 'rafamadriz/friendly-snippets' },
+    version = '1.*',
+    opts_extend = { 'sources.default' },
+    opts = {},
   },
   {
-    'navarasu/onedark.nvim',
+    'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
+    build = ':TSUpdate',
     config = function()
-      require('onedark').load()
+      require('nvim-treesitter').install({
+        'bash', 'go', 'gomod', 'gosum', 'gowork', 'javascript', 'json',
+        'lua', 'markdown', 'markdown_inline', 'python', 'query', 'rust',
+        'tsx', 'typescript', 'vim', 'vimdoc', 'yaml',
+      })
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function() pcall(vim.treesitter.start) end,
+      })
+    end,
+  },
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function() require('config/gitsigns') end,
+  },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      require("catppuccin").setup({
+          auto_integrations = true,
+          flavour = "mocha",
+      })
+      vim.cmd.colorscheme("catppuccin")
     end
   },
   {
@@ -63,11 +77,9 @@ return {
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
-    config = function()
-      require('lualine').setup {
-        options = { theme = 'onedark' },
-      }
-    end
+    opts = {
+      options = { theme = "catppuccin-nvim" },
+    },
   },
   {
     'nvim-telescope/telescope.nvim',
@@ -94,6 +106,7 @@ return {
         group = 'pencil',
         pattern = { "markdown" ,"text" },
         callback = function()
+          vim.g['pencil#conceallevel'] = 0
           vim.cmd("call pencil#init({'wrap': 'hard'})")
           vim.cmd("call litecorrect#init()")
           vim.cmd("call textobj#quote#init()")

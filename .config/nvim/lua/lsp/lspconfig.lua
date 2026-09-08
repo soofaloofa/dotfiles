@@ -3,10 +3,14 @@ local remap = require("me.util").remap
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
+
+  if client:supports_method('textDocument/inlayHint') then
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  end
   remap('n', 'gD', vim.lsp.buf.declaration, bufopts, "Go to declaration")
   remap('n', 'gd', vim.lsp.buf.definition, bufopts, "Go to definition")
   remap('n', 'gi', vim.lsp.buf.implementation, bufopts, "Go to implementation")
@@ -26,8 +30,7 @@ local on_attach = function(_, bufnr)
 end
 
 -- add completion capability
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 vim.lsp.config('gopls', {
   on_attach = on_attach,
