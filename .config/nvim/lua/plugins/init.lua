@@ -39,7 +39,9 @@ return {
     dependencies = { 'rafamadriz/friendly-snippets' },
     version = '1.*',
     opts_extend = { 'sources.default' },
-    opts = {},
+    opts = {
+      signature = { enabled = true },
+    },
   },
   {
     'nvim-treesitter/nvim-treesitter',
