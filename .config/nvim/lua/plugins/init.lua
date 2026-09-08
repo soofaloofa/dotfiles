@@ -117,6 +117,14 @@ return {
     end
   },
   {
+    'stevearc/aerial.nvim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function() require('config/aerial') end,
+  },
+  {
     'stevearc/oil.nvim',
     config = function()
       require("oil").setup({

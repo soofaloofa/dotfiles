@@ -60,6 +60,9 @@ remap("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", bufopts, "Displa
 -- remap("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", bufopts, "Display workspace errors")
 -- remap("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", bufopts, "Display document errors")
 
+-- aerial
+remap("n", "<leader>a", "<cmd>AerialToggle<cr>", bufopts, "Toggle symbols outline")
+
 -- oil
 remap("n", "<leader>n", "<cmd>Oil<cr>", bufopts, "Oil")
 
