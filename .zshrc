@@ -27,6 +27,7 @@ export LANG="en_US.UTF-8"
 # Aliases
 alias vi="nvim"
 alias vim="nvim"
+alias vgit='nvim -c "Git" -c "only"'
 alias zshconfig="nvim $HOME/.zshrc"
 
 # Jump

@@ -8,20 +8,35 @@ local bufopts = { silent = true, noremap = true }
 -- disable search highlighting by pressing enter
 remap("n", "<cr>", "<cmd>:nohlsearch<cr><cr>")
 
+-- use escape to close whatever overlay/list is currently open
+local function close_overlays()
+  if vim.api.nvim_win_get_config(0).relative ~= "" then
+    vim.api.nvim_win_close(0, true)
+    return
+  end
+  if vim.bo.filetype == "trouble" then
+    vim.cmd("Trouble close")
+    return
+  end
+  pcall(vim.cmd, "cclose")
+  pcall(vim.cmd, "lclose")
+end
+remap("n", "<Esc>", close_overlays, bufopts, "Close popups/lists")
+
 -- tab management
 remap("n", "<C-Insert>", "<cmd>:tabnew<cr>", bufopts, "New tab")
 remap("n", "<C-Delete>", "<cmd>:tabclose<cr>", bufopts, "Close tab")
 remap("i", "<C-Insert>", "<cmd>:tabnew<cr>", bufopts, "New tab")
 remap("i", "<C-Delete>", "<cmd>:tabclose<cr>", bufopts, "Close tab")
 
-remap("n", "th", "<cmd>:tabfirst<cr>", bufopts, "First tab")
-remap("n", "tk", "<cmd>:tabnext<cr>", bufopts, "Next tab")
-remap("n", "tj", "<cmd>:tabprev<cr>", bufopts, "Previous tab")
-remap("n", "tl", "<cmd>:tablast<cr>", bufopts, "Last tab")
-remap("n", "tt", "<cmd>:tabedit<cr>", bufopts, "New tab")
-remap("n", "td", "<cmd>:tabclose<cr>", bufopts, "Close tab")
-remap("n", "tn", "<cmd>:tabmove -1<cr>", bufopts, "Move tab next")
-remap("n", "tm", "<cmd>:tabmove +1<cr>", bufopts, "Move tab previous")
+remap("n", "<leader>th", "<cmd>:tabfirst<cr>", bufopts, "First tab")
+remap("n", "<leader>tj", "<cmd>:tabnext<cr>", bufopts, "Next tab")
+remap("n", "<leader>tk", "<cmd>:tabprev<cr>", bufopts, "Previous tab")
+remap("n", "<leader>tl", "<cmd>:tablast<cr>", bufopts, "Last tab")
+remap("n", "<leader>tt", "<cmd>:tabedit<cr>", bufopts, "New tab")
+remap("n", "<leader>td", "<cmd>:tabclose<cr>", bufopts, "Close tab")
+remap("n", "<leader>tJ", "<cmd>:tabmove +1<cr>", bufopts, "Move tab later")
+remap("n", "<leader>tK", "<cmd>:tabmove -1<cr>", bufopts, "Move tab earlier")
 
 -- window management
 remap("n", "<C-S-Right>", "<cmd>:vertical resize -1<cr>", bufopts, "Minimize window")
@@ -48,12 +63,6 @@ remap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", bufopts, "Find file")
 remap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", bufopts, "Grep")
 remap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", bufopts, "Find buffer")
 remap("n", "<leader>fm", "<cmd>Telescope marks<cr>", bufopts, "Find mark")
-remap("n", "<leader>fr", "<cmd>Telescope lsp_references<cr>", bufopts, "Find references (LSP)")
-remap("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", bufopts, "Find symbols (LSP)")
-remap("n", "<leader>fc", "<cmd>Telescope lsp_incoming_calls<cr>", bufopts, "Find incoming calls (LSP)")
-remap("n", "<leader>fo", "<cmd>Telescope lsp_outgoing_calls<cr>", bufopts, "Find outgoing calls (LSP)")
-remap("n", "<leader>fi", "<cmd>Telescope lsp_implementations<cr>", bufopts, "Find implementations (LSP)")
-remap("n", "<leader>fx", "<cmd>Telescope diagnostics bufnr=0<cr>", bufopts, "Find errors (LSP)")
 
 -- trouble
 remap("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", bufopts, "Display errors")
